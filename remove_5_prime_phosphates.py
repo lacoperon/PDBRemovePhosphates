@@ -40,7 +40,6 @@ def remove_phosphates(input_file, output_file):
 
         if after_resid == resid and atom_name.strip() in ["P","OP1","OP2","OP3"]:
             print("Deleting {} at {}".format(atom_name, resid))
-            
         else:
             output_lines.append(line)
 
@@ -54,7 +53,11 @@ def remove_phosphates(input_file, output_file):
 
 
 if __name__ == "__main__":
-    assert len(sys.argv) >= 2
+
+    if len(sys.argv) < 2:
+        print(">>Please input the PDB file you want to process as an argument")
+        print(">>Example:")
+        print("python remove_5_prime_phosphates.py 5jup.pdb")
 
     input_files  = sys.argv[1:]
     output_files = [x.split(".")[0] + "_pfilt.pdb" for x in input_files]
